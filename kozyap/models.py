@@ -7,22 +7,6 @@ from django.db.models import CharField
 def get_date(*args, **kwargs):
     return datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
 
-
-class Brigadier(Model):
-    full_name = CharField(verbose_name="Ism Familya", max_length=50)
-    tgid = BigIntegerField(verbose_name="Telegram ID", unique=True)
-    username = CharField(verbose_name="Telegram Username", max_length=20, null=True)
-    phone = CharField(max_length=13, null=True)
-
-    class Meta:
-        db_table = "bridgadier"
-        verbose_name = "Brigadier"
-        verbose_name_plural = "Brigadiers"
-
-    def __str__(self):
-        return self.full_name
-
-
 class Object(models.Model):
     name = models.CharField(verbose_name="Obyekt nomi", max_length=56)
     location = models.CharField(verbose_name="Joylashuvi ", max_length=56)
@@ -37,10 +21,31 @@ class Object(models.Model):
         return self.name
 
 
+class Brigadier(Model):
+    full_name = CharField(verbose_name="Ism Familya", max_length=50)
+    tgid = BigIntegerField(verbose_name="Telegram ID", unique=True)
+    username = CharField(verbose_name="Telegram Username", max_length=20, null=True)
+    phone = CharField(max_length=13, null=True)
+
+    class Meta:
+        db_table = "bridgadier"
+        verbose_name = "Brigader"
+        verbose_name_plural = "Brigadirlar"
+
+    def __str__(self):
+        return self.full_name
+
+    @property
+    def get_staff(self):
+        return self.staff.all()
+
+
 class Staff(models.Model):
     full_name = models.CharField(verbose_name="Ism Familya", max_length=56)
     tgid = models.IntegerField(verbose_name="Telegram ID", unique=True, null=True, blank=True)
-    username = models.CharField(verbose_name="Telegram Username",max_length=120, unique=True, null=True)
+    username = models.CharField(verbose_name="Telegram Username", max_length=120, unique=True, null=True)
+    brigadier = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, related_name="staff",
+                                  on_delete=models.SET_DEFAULT, default=1)
 
     class Meta:
         db_table = "stuff"
@@ -50,15 +55,23 @@ class Staff(models.Model):
     def __str__(self):
         return self.full_name
 
+
 #
-# class StaffReport(Model):
-#     date = models.DateField("Sana", editable=True, value=get_date)
-#     work_hour = models.DecimalField("Ish Smena", decimal_places=1, max_digits=3)
-#     stuff_id = models.ForeignKey(verbose_name="Hodim", to=Staff, on_delete=models.SET_NULL)
-#
-#     def __str__(self):
-#         return self.date
-#
+class StaffReport(Model):
+    date = models.DateField(verbose_name="Sana", editable=True)
+    work_hour = models.DecimalField(verbose_name="Ish Smena", decimal_places=1, max_digits=3)
+    stuff_id = models.ForeignKey(verbose_name="Hodim", to=Staff, on_delete=models.SET_DEFAULT, default=0,
+                                 related_name="reports")
+    dwage = models.BigIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.date}"
+
+    class Meta:
+        db_table = "staff_report"
+        verbose_name = "KunlikHodim"
+        verbose_name_plural = "KunlikHodimlar"
+
 # class CABack(Model):
 #     brigadier_id = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, on_delete=models.SET_NULL)
 #     object = models.ForeignKey(verbose_name="Obyekt", to=Object, on_delete=models.SET_NULL, max_length=512)
