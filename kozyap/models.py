@@ -64,7 +64,7 @@ class Staff(models.Model):  # Xodim
 class StaffReport(models.Model):  # Xodimlar Keldi Kettisi Bitta Hodim uchun
     date = models.DateField(verbose_name="Sana", editable=True)
     work_hour = models.DecimalField(verbose_name="Ish Smena", decimal_places=1, max_digits=3)
-    stuff_id = models.ForeignKey(verbose_name="Hodim", to=Staff, on_delete=models.SET_DEFAULT, default=0,
+    stuff = models.ForeignKey(verbose_name="Hodim", to=Staff, on_delete=models.SET_DEFAULT, default=0,
                                  related_name="reports")
     dwage = models.BigIntegerField(default=0)
 
@@ -86,8 +86,10 @@ class Intruments(models.Model):
         db_table = "instrument"
         verbose_name = "Uskuna"
         verbose_name_plural = "Uskunalar"
+
     def __str__(self):
-        return  self.name
+        return self.name
+
 
 # class CABack(Model): #Keldi Ketdi
 #     brigadier_id = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, on_delete=models.SET_NULL)
@@ -126,28 +128,26 @@ class ToDoList(models.Model):  # Qilingan IShlar Royhati
         verbose_name_plural = "Qilingan Ishlar Ro'yhati"
 
     def __str__(self):
-        return  f"{self.object}"
-#
-#
-# class Cost(models.Model):  # Pul Harajatlari
-#     date = models.DateField()
-#     owner = models.CharField(verbose_name="Kim Berdi", null=False)
-#     stuff = models.CharField(verbose_name="Kim Oldi", null=False)
-#     object = models.ForeignKey(verbose_name="Qaysi obyekt uchun harajat", to=Object, related_name="costs",
-#                                on_delete=models.SET_DEFAULT, default=-1)
-#     reason = models.CharField(verbose_name="Maqsadi", )
-#     input = models.CharField(verbose_name="Kirim", null=True)
-#     output = models.CharField(verbose_name="Chiqim", null=True)
-#     balance = models.CharField(verbose_name="Qolgan Summa", null=False)
-#     admin_comment = models.TextField(verbose_name="Admin Izoh", null=False)
-#     def clean(self):
-#         if self.input and self.output:
-#             raise ValidationError(
-#                 "Iltimos Kirim Chiqimni bittasini tanlang")
-#         elif self.input and self.output:
-#             raise ValidationError(
-#                 "Iltimos Yoki Kirim ni Yoki CHiqimni toldiring")
-#
+        return f"{self.object}"
+
+
+class Cost(models.Model):  # Pul Harajatlari
+    date = models.DateField()
+    owner = models.CharField(verbose_name="Kim Berdi", null=True, max_length=128)
+    stuff = models.CharField(verbose_name="Kim Oldi", null=True,max_length=128)
+    object = models.ForeignKey(verbose_name="Qaysi obyekt uchun harajat", to=Object, related_name="costs",
+                               on_delete=models.SET_NULL, default=-1, null=True)
+    reason = models.CharField(verbose_name="Maqsadi", null=True,max_length=128)
+    input = models.IntegerField(verbose_name="Kirim", null=True)
+    output = models.IntegerField(verbose_name="Chiqim", null=True)
+    balance = models.IntegerField(verbose_name="Qolgan Summa", null=False)
+    admin_comment = models.TextField(verbose_name="Admin Izoh", null=True)
+
+    class Meta:
+        db_table = "cost"
+        verbose_name = "Pul Harajarti"
+        verbose_name_plural = "Pul Harajartlari"
+
 # class Instrument(models.Model): #Instrument  Oldi berdisi
 #     owner = models.ForeignKey(verbose_name="Kim berdi",to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
 #     object = models.ForeignKey(verbose_name="Obyekt nomi",to=Object, on_delete=models.SET_DEFAULT, default=-1)
