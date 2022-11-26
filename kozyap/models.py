@@ -117,7 +117,7 @@ class ToDoList(models.Model):  # Qilingan IShlar Royhati
     measure = models.CharField(max_length=56, verbose_name="O'lchov birligi", null=True)
     size = models.CharField(max_length=128, verbose_name="Qilingan ish obyomi", null=True)
     price = models.IntegerField(verbose_name="Narxi", null=True)
-    total = models.IntegerField(verbose_name="Jami", null=True)
+    total = models.BigIntegerField(verbose_name="Jami", null=True)
     admin_comment = models.TextField(verbose_name="Admin Izohi", null=True)
 
     class Meta:
