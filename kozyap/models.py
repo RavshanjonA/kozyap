@@ -81,7 +81,7 @@ class Intruments(models.Model):
     owner = models.ForeignKey(verbose_name="Brigadier", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
     status = models.CharField(verbose_name="Holati", max_length=128)
     name = models.CharField(verbose_name="Instrument Nomi", max_length=128)
-    number = models.CharField(verbose_name="Instrument Nomeri", max_length=45)
+    number = models.CharField(verbose_name="Instrument Nomeri", max_length=45, default=0)
 
     class Meta:
         db_table = "instrument"
@@ -135,10 +135,10 @@ class ToDoList(models.Model):  # Qilingan IShlar Royhati
 class Cost(models.Model):  # Pul Harajatlari
     date = models.DateField()
     owner = models.CharField(verbose_name="Kim Berdi", null=True, max_length=128)
-    stuff = models.CharField(verbose_name="Kim Oldi", null=True,max_length=128)
+    stuff = models.CharField(verbose_name="Kim Oldi", null=True, max_length=128)
     object = models.ForeignKey(verbose_name="Qaysi obyekt uchun harajat", to=Object, related_name="costs",
                                on_delete=models.SET_NULL, default=-1, null=True)
-    reason = models.CharField(verbose_name="Maqsadi", null=True,max_length=128)
+    reason = models.CharField(verbose_name="Maqsadi", null=True, max_length=128)
     input = models.IntegerField(verbose_name="Kirim", null=True)
     output = models.IntegerField(verbose_name="Chiqim", null=True)
     balance = models.IntegerField(verbose_name="Qolgan Summa", null=False)
@@ -149,6 +149,10 @@ class Cost(models.Model):  # Pul Harajatlari
         verbose_name = "Pul Harajarti"
         verbose_name_plural = "Pul Harajartlari"
 
-# class Instrument(models.Model): #Instrument  Oldi berdisi
-#     owner = models.ForeignKey(verbose_name="Kim berdi",to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
-#     object = models.ForeignKey(verbose_name="Obyekt nomi",to=Object, on_delete=models.SET_DEFAULT, default=-1)
+
+class ExChangeInstrument(models.Model):  # Instrument  Oldi berdisi
+    date = models.DateField(verbose_name="Olingan Sana")
+    owner = models.ForeignKey(verbose_name="Kim berdi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="owner")
+    object = models.ForeignKey(verbose_name="Obyekt nomi", to=Object, on_delete=models.SET_DEFAULT, default=-1)
+    given = models.ForeignKey(verbose_name="Kim Oldi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="given")
+    instrument = models.ForeignKey(verbose_name="Instrument", to=Intruments,on_delete=models.SET_DEFAULT, default=-1, related_name="exchange")
