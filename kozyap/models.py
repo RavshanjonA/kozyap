@@ -65,7 +65,7 @@ class StaffReport(models.Model):  # Xodimlar Keldi Kettisi Bitta Hodim uchun
     date = models.DateField(verbose_name="Sana", editable=True)
     work_hour = models.DecimalField(verbose_name="Ish Smena", decimal_places=1, max_digits=3)
     stuff = models.ForeignKey(verbose_name="Hodim", to=Staff, on_delete=models.SET_DEFAULT, default=0,
-                                 related_name="reports")
+                              related_name="reports")
     dwage = models.BigIntegerField(default=0)
 
     def __str__(self):
@@ -81,6 +81,7 @@ class Intruments(models.Model):
     owner = models.ForeignKey(verbose_name="Brigadier", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
     status = models.CharField(verbose_name="Holati", max_length=128)
     name = models.CharField(verbose_name="Instrument Nomi", max_length=128)
+    number = models.CharField(verbose_name="Instrument Nomeri", max_length=45, default=0)
 
     class Meta:
         db_table = "instrument"
@@ -88,10 +89,10 @@ class Intruments(models.Model):
         verbose_name_plural = "Uskunalar"
 
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.number} "
 
 
-# class CABack(Model): #Keldi Ketdi
+# class CABack(Model): #Keldi Ketdi Oylik Hisobot
 #     brigadier_id = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, on_delete=models.SET_NULL)
 #     object = models.ForeignKey(verbose_name="Obyekt", to=Object, on_delete=models.SET_NULL, max_length=512)
 #     location_name = models.CharField(verbose_name="Lokatsiya", max_length=512, on_delete=models.SET_NULL, null=True)
@@ -134,10 +135,10 @@ class ToDoList(models.Model):  # Qilingan IShlar Royhati
 class Cost(models.Model):  # Pul Harajatlari
     date = models.DateField()
     owner = models.CharField(verbose_name="Kim Berdi", null=True, max_length=128)
-    stuff = models.CharField(verbose_name="Kim Oldi", null=True,max_length=128)
+    stuff = models.CharField(verbose_name="Kim Oldi", null=True, max_length=128)
     object = models.ForeignKey(verbose_name="Qaysi obyekt uchun harajat", to=Object, related_name="costs",
                                on_delete=models.SET_NULL, default=-1, null=True)
-    reason = models.CharField(verbose_name="Maqsadi", null=True,max_length=128)
+    reason = models.CharField(verbose_name="Maqsadi", null=True, max_length=128)
     input = models.IntegerField(verbose_name="Kirim", null=True)
     output = models.IntegerField(verbose_name="Chiqim", null=True)
     balance = models.IntegerField(verbose_name="Qolgan Summa", null=False)
@@ -148,6 +149,10 @@ class Cost(models.Model):  # Pul Harajatlari
         verbose_name = "Pul Harajarti"
         verbose_name_plural = "Pul Harajartlari"
 
-# class Instrument(models.Model): #Instrument  Oldi berdisi
-#     owner = models.ForeignKey(verbose_name="Kim berdi",to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
-#     object = models.ForeignKey(verbose_name="Obyekt nomi",to=Object, on_delete=models.SET_DEFAULT, default=-1)
+
+class ExChangeInstrument(models.Model):  # Instrument  Oldi berdisi
+    date = models.DateField(verbose_name="Olingan Sana")
+    owner = models.ForeignKey(verbose_name="Kim berdi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="owner")
+    object = models.ForeignKey(verbose_name="Obyekt nomi", to=Object, on_delete=models.SET_DEFAULT, default=-1)
+    given = models.ForeignKey(verbose_name="Kim Oldi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="given")
+    instrument = models.ForeignKey(verbose_name="Instrument", to=Intruments,on_delete=models.SET_DEFAULT, default=-1, related_name="exchange")
