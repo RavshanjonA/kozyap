@@ -1,7 +1,7 @@
-from django.core.exceptions import ValidationError
 from django.db import models
-
 from datetime import datetime, timedelta
+
+from django.db.models import FloatField
 
 
 def get_date(*args, **kwargs):
@@ -11,7 +11,7 @@ def get_date(*args, **kwargs):
 class Object(models.Model):  # Obyekt
     name = models.CharField(verbose_name="Obyekt nomi", max_length=56)
     location = models.CharField(verbose_name="Joylashuvi ", max_length=56)
-    geolokatsiyasi = models.CharField(verbose_name="Geolokatsiyasi", max_length=512)
+    geolokatsiyasi = models.CharField(verbose_name="Geolokatsiyasi", max_length=129)
 
     class Meta:
         db_table = "object"
@@ -92,6 +92,20 @@ class Intruments(models.Model):
         return f"{self.name} {self.number} "
 
 
+# class Transport(models.Model):
+#     name = models.CharField(verbose_name="Mashina Nomi", max_length=128)
+#     number = models.CharField(verbose_name="Mashina Raqami", max_length=128)
+#     company = models.CharField(verbose_name="Mashina Raqami", max_length=128)
+#
+#
+# class Driver(models.Model):
+#     fullname = models.CharField(verbose_name="Ism Familya",max_length=128)
+#     username = models.CharField(verbose_name="Telegram Username" , max_length=56)
+#     phone = models.CharField(verbose_name="Telefon Raqam", max_length=13)
+#     tgid = models.IntegerField(verbose_name="Telegram ID")
+#     transport = models.ForeignKey(verbose_name="Mashinasi", on_delete=models.SET_DEFAULT, default=-1,null=True)
+
+
 # class CABack(Model): #Keldi Ketdi Oylik Hisobot
 #     brigadier_id = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, on_delete=models.SET_NULL)
 #     object = models.ForeignKey(verbose_name="Obyekt", to=Object, on_delete=models.SET_NULL, max_length=512)
@@ -110,6 +124,25 @@ class Intruments(models.Model):
 #         return self.brigadier_id.__str__()
 #
 #
+class Location:
+    def __init__(self, latitude, longitude):
+        self.latitude = latitude
+        self.longitude = longitude
+
+    # class LocationField(MultiValueField):
+    #     def __init__(self, *args, **kwargs):
+    #         fields = (
+    #             FloatField(max_value=90, min_value=-90),
+    #             FloatField((max_value=90, min_value=-90)
+    #         )
+    #         super().__init__(*args, **kwargs)
+    #
+
+    def compress(self, data_list):
+        latitude, longitude = data_list
+        return Location(latitude, longitude)
+
+
 class ToDoList(models.Model):  # Qilingan IShlar Royhati
     date = models.DateField(verbose_name="Sana", unique=False)
     brigadier = models.ForeignKey(verbose_name="Brigadir", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
@@ -152,7 +185,24 @@ class Cost(models.Model):  # Pul Harajatlari
 
 class ExChangeInstrument(models.Model):  # Instrument  Oldi berdisi
     date = models.DateField(verbose_name="Olingan Sana")
-    owner = models.ForeignKey(verbose_name="Kim berdi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="owner")
+    owner = models.ForeignKey(verbose_name="Kim berdi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1,
+                              related_name="owner")
     object = models.ForeignKey(verbose_name="Obyekt nomi", to=Object, on_delete=models.SET_DEFAULT, default=-1)
-    given = models.ForeignKey(verbose_name="Kim Oldi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1, related_name="given")
-    instrument = models.ForeignKey(verbose_name="Instrument", to=Intruments,on_delete=models.SET_DEFAULT, default=-1, related_name="exchange")
+    given = models.ForeignKey(verbose_name="Kim Oldi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1,
+                              related_name="given")
+    instrument = models.ForeignKey(verbose_name="Instrument", to=Intruments, on_delete=models.SET_DEFAULT, default=-1,
+                                   related_name="exchange")
+    status = models.CharField(verbose_name="Instrument holati", max_length=128, default="-")
+    count = models.IntegerField(verbose_name="Soni", default=0)
+    count_type = models.CharField(verbose_name="Sanoq Turi", max_length=24, default='-')
+    input = models.IntegerField(verbose_name="Kirim", default=0)
+    output = models.IntegerField(verbose_name="Chiqim", default=0)
+    admin_comment = models.CharField(verbose_name="Admin Izohi", max_length=128, default='')
+
+    class Meta:
+        db_table = "exchangeinstrument"
+        verbose_name = "Instrument Oldi Berdi"
+        verbose_name_plural = "Instrument Ooldi Berdisi"
+
+    def __str__(self):
+        return f"{self.owner} : {self.given}"
