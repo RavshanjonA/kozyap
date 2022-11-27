@@ -1,9 +1,6 @@
 from django.db import models
 from datetime import datetime, timedelta
 
-from django.db.models import FloatField
-
-
 def get_date(*args, **kwargs):
     return datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
 
@@ -12,6 +9,7 @@ class Object(models.Model):  # Obyekt
     name = models.CharField(verbose_name="Obyekt nomi", max_length=56)
     location = models.CharField(verbose_name="Joylashuvi ", max_length=56)
     geolokatsiyasi = models.CharField(verbose_name="Geolokatsiyasi", max_length=129)
+
 
     class Meta:
         db_table = "object"
@@ -92,18 +90,18 @@ class Intruments(models.Model):
         return f"{self.name} {self.number} "
 
 
-# class Transport(models.Model):
-#     name = models.CharField(verbose_name="Mashina Nomi", max_length=128)
-#     number = models.CharField(verbose_name="Mashina Raqami", max_length=128)
-#     company = models.CharField(verbose_name="Mashina Raqami", max_length=128)
-#
-#
-# class Driver(models.Model):
-#     fullname = models.CharField(verbose_name="Ism Familya",max_length=128)
-#     username = models.CharField(verbose_name="Telegram Username" , max_length=56)
-#     phone = models.CharField(verbose_name="Telefon Raqam", max_length=13)
-#     tgid = models.IntegerField(verbose_name="Telegram ID")
-#     transport = models.ForeignKey(verbose_name="Mashinasi", on_delete=models.SET_DEFAULT, default=-1,null=True)
+class Transport(models.Model):
+    name = models.CharField(verbose_name="Mashina Nomi", max_length=128)
+    number = models.CharField(verbose_name="Mashina Raqami", max_length=128)
+    company = models.CharField(verbose_name="Mashina Raqami", max_length=128)
+
+
+class Driver(models.Model):
+    fullname = models.CharField(verbose_name="Ism Familya", max_length=128)
+    username = models.CharField(verbose_name="Telegram Username", max_length=56)
+    phone = models.CharField(verbose_name="Telefon Raqam", max_length=13)
+    tgid = models.IntegerField(verbose_name="Telegram ID")
+    transport = models.ForeignKey(verbose_name="Mashinasi", to=Transport, on_delete=models.SET_DEFAULT, default=-1)
 
 
 # class CABack(Model): #Keldi Ketdi Oylik Hisobot
@@ -206,3 +204,15 @@ class ExChangeInstrument(models.Model):  # Instrument  Oldi berdisi
 
     def __str__(self):
         return f"{self.owner} : {self.given}"
+
+
+class TechnicTodos(models.Model):  # Texnikalar Hisobi
+    date = models.DateField(verbose_name="Sana")
+    driver = models.ForeignKey(verbose_name="Texnika Mashinisti", to=Driver, on_delete=models.SET_DEFAULT, default=-1,
+                               related_name="techtodos")
+    object = models.ForeignKey(verbose_name="Texnika Nomi", to=Object, on_delete=models.SET_DEFAULT, default=-1,
+                               related_name="techtodos")
+    transport = models.ForeignKey(verbose_name="Texnika Nomi", to=Transport, on_delete=models.SET_DEFAULT, default=-1,
+                                  related_name="techtodos")
+    todos = models.CharField(verbose_name="Nima Ish Qildi", max_length=256)
+
