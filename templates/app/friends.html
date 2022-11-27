@@ -1,0 +1,147 @@
+{% extends 'app/base/base.html' %}    <!-- End header  -->
+{% block content %}
+    {% load static %}
+    <!-- End header  -->
+
+    <!-- Start All Pages Sub header -->
+
+    <section id="parallax" class="head-sub-main">
+
+        <div class="bg-overlay"></div>
+
+        <div class="container">
+
+            <div class="all-box-inner">
+
+                <h1>Bizning Hamkorlarimiz</h1>
+
+
+                <div class="breadcrumb-container clearfix">
+
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'index' %}">Bosh Sahifa</a></li>
+                        <li class="active">Bizning Hamkorlarimiz</li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- End All Pages Sub header-->
+
+    <!-- Start our-leaders -->
+
+    <section class="paragraph-bg bcc-padding">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-12 text-center">
+
+                    <div class="title-section-inner">
+
+                        <h3>Bizning Hamkorlarimiz</h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="leaders-main">
+
+                    <p>O'rnatilgan har bir strategik hamkorlik ishlab chiqiladigan yechimlar uchun yangi imkoniyatlar va
+                        ijodiy platformalarni taklif etadi. Ushbu dinamikadan xabardor bo'lgan Kozyap İnşaat o'zining
+                        global miqyosda qabul qilingan, ishonchli va innovatsion yechim hamkorlari bilan sifatli
+                        yondashuv bo'yicha hamjihatlikda harakat qilib, professional tajribasini mustahkamlaydi va
+                        maqsadli sinergiya yaratib, o'zini doimiy ravishda yangilaydi.</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row margin-top-40 margin-bottom-40">
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="team-leader-box">
+                        {% for partner in partners %}
+                            <div class="hover-team">
+
+                                <img src="{{ partner.image.url }}" alt="atlas1"/>
+
+                            </div>
+
+                            <div class="team-wrap">
+
+                            <div class="team-content">
+
+                                <h6 class="team-name">{{ partner.title }} </h6>
+
+                                <div class="team-role">{{ partner.little_desc }}</div>
+
+                            </div>
+
+                            <div class="team-content-social">
+
+
+                            </div>
+                        {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <!-- End our-leaders -->
+
+    <!-- Start Our Testimonials -->
+
+
+    <!-- End Our Testimonials -->
+
+    <!-- Start Call Now -->
+
+    <section id="third" class="call-now-box bcc-padding">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-9 col-sm-12">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- End Call Now -->
+
+    <!-- Start Partner -->
+
+
+    <!-- End Partner -->
+
+    <!-- Start Footer -->
+{% endblock content %}

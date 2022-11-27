@@ -6,7 +6,7 @@ from root import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('kozyap.urls'))
+    path('', include('kozyap_site.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

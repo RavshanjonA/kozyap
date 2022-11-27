@@ -12,6 +12,8 @@ class Object(models.Model):  # Obyekt
     name = models.CharField(verbose_name="Obyekt nomi", max_length=56)
     location = models.CharField(verbose_name="Joylashuvi ", max_length=56)
     geolokatsiyasi = models.CharField(verbose_name="Geolokatsiyasi", max_length=129)
+    brigadier = models.ForeignKey(verbose_name="Brigadir", to='kozyap.Brigadier', related_name="ojects",
+                                  on_delete=models.SET_NULL, null=True)
 
     class Meta:
         db_table = "object"
