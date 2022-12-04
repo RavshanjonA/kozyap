@@ -11,6 +11,19 @@ class BaseModel(Model):
         abstract = True
 
 
+class Service(BaseModel):
+    title = CharField(verbose_name="Sarlavha", max_length=255)
+    description = TextField(verbose_name="Malumot")
+    image = ImageField(verbose_name="Rasm", upload_to="images/")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Servis"
+        verbose_name_plural = "Servis"
+
+
 class About(BaseModel):
     title = CharField(verbose_name='Sarlavha', max_length=255)
     description = TextField(verbose_name='Malumot')
@@ -96,6 +109,8 @@ class ContactForm(BaseModel):
         db_table = "contact"
         verbose_name = "Kontaktdan"
         verbose_name_plural = "Kontakdan"
+
+
 from django.db import models
 
 # Create your models here.

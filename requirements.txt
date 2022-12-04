@@ -107,7 +107,6 @@ pipenv==2022.4.21
 platformdirs==2.5.0
 prometheus-client==0.13.1
 prompt-toolkit==3.0.28
-psycopg2==2.9.3
 psycopg2-binary==2.9.5
 pure-eval==0.2.2
 pyasn1==0.4.8

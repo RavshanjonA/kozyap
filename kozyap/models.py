@@ -136,7 +136,7 @@ class Location:
     #             FloatField((max_value=90, min_value=-90)
     #         )
     #         super().__init__(*args, **kwargs)
-    #
+
 
     def compress(self, data_list):
         latitude, longitude = data_list

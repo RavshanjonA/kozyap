@@ -227,48 +227,19 @@
 
                                 </li>
 
+
                                 <li class="nav-item dropdown-bcc">
 
                                     <a class="nav-link" href="#">
-
                                         Hizmatlarimiz
-
                                     </a>
 
-                                    <ul class="sub-menu">
+                                    {% for i in services %}
+                                        <ul class="sub-menu">
+                                            <li><a class="dropdown-item" href="lazer-screed.html">{{ i.title }}</a></li>
 
-                                        <li><a class="dropdown-item" href="lazer-screed.html">Lazer Screed</a></li>
-
-                                        <li><a class="dropdown-item" href="endustriyel-zemin-beton-uygulamalari.html">Endüstriyel
-                                            Zemin Beton</a></li>
-
-                                        <li><a class="dropdown-item" href="endustriyel-zemin-kaplama.html">Endüstriyel
-                                            Zemin Kaplama</a></li>
-
-                                        <li><a class="dropdown-item" href="baski-beton.html">Baskı Beton
-                                            uygulamaları</a></li>
-
-                                        <li><a class="dropdown-item" href="beton-parlatma.html">Beton Parlatma
-                                            Uygulamaları</a></li>
-
-                                        <li><a class="dropdown-item" href="beton-tozumazlik.html">Beton Tozumazlık
-                                            uygulamaları</a></li>
-
-                                        <li><a class="dropdown-item" href="sivi-yuzey.html">Epoksi Kaplama</a></li>
-
-                                        <li><a class="dropdown-item" href="free-movement.html">Free Movement(FM2)</a>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="derz-uygulamalari.html">Derz Uygulamaları</a>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="bakim-onarim.html">Bakım Ve Onarım</a></li>
-
-                                        <li><a class="dropdown-item" href="urun-grubu.html">Ürün Grubu</a></li>
-
-                                        <li><a class="dropdown-item" href="makina-parkuru.html">Makina Parkuru</a></li>
-
-                                    </ul>
+                                        </ul>
+                                    {% endfor %}
 
                                 </li>
 

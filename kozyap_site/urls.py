@@ -1,7 +1,7 @@
 from django.urls import path
 
 from kozyap_site.views import IndexPageView, AboutPageView, ReferencePageView, FriendPageView, GalleryPageView, \
-    CommunicatePageView
+    CommunicatePageView, ServicePageView
 
 urlpatterns = [
     path('', IndexPageView.as_view(), name='index'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('reference/', ReferencePageView.as_view(), name='reference'),
     path('partner/', FriendPageView.as_view(), name='partner'),
     path('gallery/', GalleryPageView.as_view(), name='gallery'),
-    path('communicate/', CommunicatePageView.as_view(), name='communicate')
+    path('communicate/', CommunicatePageView.as_view(), name='communicate'),
+    path('service/<int:id>/', ServicePageView.as_view(), name='service')
 ]

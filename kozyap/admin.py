@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from kozyap.models import Staff, Object, Brigadier, StaffReport, ToDoList, Intruments
-from kozyap_site.models import About, Gallery, GalleryCategory, Partner, ContactForm
+from kozyap_site.models import About, Gallery, GalleryCategory, Partner, ContactForm, Service
 
 admin.site.register(Staff)
 admin.site.register(Object)
@@ -14,3 +14,4 @@ admin.site.register(Gallery)
 admin.site.register(GalleryCategory)
 admin.site.register(Partner)
 admin.site.register(ContactForm)
+admin.site.register(Service)

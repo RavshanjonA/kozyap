@@ -6,93 +6,48 @@
         <div class="bg-overlay"></div>
 
         <div class="container">
+            {% for service in services %}
+                <div class="all-box-inner">
 
-            <div class="all-box-inner">
+                    <h1>{{ service.title }} </h1>
 
-                <h1>Somero Laser Screed </h1>
+                    <div class="breadcrumb-container clearfix">
 
-                <div class="breadcrumb-container clearfix">
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'index' %}">Anasayfa</a></li>
+                            <li class="active">Laser Screed</li>
 
-                    <ul class="breadcrumb">
-                        <li><a href="index.html">Anasayfa</a></li>
-                        <li class="active">Laser Screed</li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End All Pages Sub header-->
-    <!-- Start Certification -->
-
-    <section class="paragraph-bg bcc-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="title-section-inner">
-                        <h3>Laser Screed (Lazerli Beton Serici)</h3>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <div class="row margin-bottom-60">
+                </div>
+                </section>
+                <!-- End All Pages Sub header-->
+                <!-- Start Certification -->
+
+                <section class="paragraph-bg bcc-padding">
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="title-section-inner">
+                            <h3>{{ service.title }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-60">
                 <div class="col-md-8 col-sm-12">
-                    <div class="left-certification">
+                <div class="left-certification">
+                    <p>{{ service.description }}</p>
+                    <div align="center"><img src="{{ service.image.url }}" alt="resim"></div>
 
-                        <div align="center"><img src="images/somero_s10a.jpg" alt="resim"></div>
-                        <p>Somero s10-A Laser Screed iki aşamalı teleskopik bumla donatılmış 360 derece dönebilen
-                            x-treme
-                            platformdan oluşmuştur.Bumun ucunda pulluk, beton seviyesini ayarlamak için matkap ve onu
-                            sıkıştırmak için gerekli olan titreşimli kalasın bulunduğu çalışma bloğundan
-                            yerleştirilmiştir.</p>
-
-
-                        <p>Bu çalışma bloğu betonu tam seviyesine uygun olarak yerleştirilmesini sağlayan lazer sistem
-                            tarafından kontrol edilmektedir.Çalışma bloğundaki iki alıcı tarafından alınan sinyallerin
-                            yardımı ile verilen yerleşim ile devamlı irtibat sağlamaktadır.Bu sinyaller çalışma bloğunu
-                            harekete geçiren yüksek hızlı hidravlik silindirlerin otomatik ayarlanması için
-                            kullanılmaktadır.</p>
-                        <p>Beton yerden verilen yerleşim alanına 5 m genişlikli şeritli beton dökülerek laser screed
-                            aracı,
-                            teleskopik bum beton altında ileri sürülecek şekilde hareket etmektedir.Çalışma bloğu lazer
-                            verici tarafından tayin edilen yerleşim alanına uygulandığı zaman, teleskopik bum yer
-                            değiştirerek çalışma bloğu yeni konulmuş betonun üzerinden sadece bir defa geçerek onun
-                            ayarlanmasını ve sıkılaştırılmasını sağlamaktadır.
-
-                            Başka bir geçiş için ise Somero s10-A Laser Screed artık işlenmiş alan üzerinde kenara
-                            (genelde
-                            soldan sağa olmak üzere) çekilmektedir.Bu işlem işler bitene kadar devam etmektedir.</p>
-                        <p>Bu şekilde Somero s10-A Laser Screed aracının ve saatlik 60-80 m3’lük betonun sağlanması
-                            durumunda daha az dilatasyon 50 metreden daha geniş alanların betonlanması mümkün
-                            olmaktadır.
-
-                            Somero s10-A Laser Screed 3-d profiller ile birlikte uygulandığı zaman ise ister verilen
-                            rölyefe
-                            isterse de başka istenilen rölyefe uygun betonlama işlemi yapılması mümkün
-                            olmaktadır.3-profiler
-                            sistemi otomobil park alanları, yükleme alanları, yük tersaneleri, servis rampaları ve
-                            yaklaşım
-                            yolları için uygun beton kaplama sistemidir.
-
-                            Aynı zamanda yol kaplamaları ve otoban onarımı, iniş-kalkış pistleri ve köprülere de
-                            uygulanabilmektedir.</p>
-                        <p>Döşeme tertibatının takviyesi için ise, Somero s10-A Laser Screed’in armatür üzerinde
-                            hareketini
-                            sağlayan sahne sistemi uygulanabilir.
-
-                            Somero s10-A Laser Screed –Park alanları, Depolar, Ticaret ve Fuar Merkezleri, Hava
-                            alanları,
-                            Tersaneler ve otobanların beton kaplamaları için düşünülmüş günlük 5000 m2’lik üretim gücüne
-                            sahip gerçek imkanlar demektir.</p>
-                        <iframe width="350" height="315" src="https://www.youtube.com/embed/l02uGa1KMUk" frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
                 </div>
+            {% endfor %}
+            </div>
 
             </div>
 
-        </div>
-    </section>
+            </div>
+            </section>
 
 
     <!-- End Certification -->

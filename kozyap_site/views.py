@@ -1,11 +1,35 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from kozyap_site.models import About, Partner
+from kozyap_site.models import About, Partner, Gallery, Service
+
+
+class BaseView(TemplateView):
+    template_name = 'app/base/base.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        services = Service.objects.all()
+
+        context['services'] = services
+
+        return context
 
 
 class IndexPageView(TemplateView):
     template_name = 'app/index.html'
+
+
+class ServicePageView(TemplateView):
+    template_name = 'app/service.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        services = Service.objects.order_by('-created_at')
+
+        context['services'] = services
+
+        return context
 
 
 class AboutPageView(TemplateView):
