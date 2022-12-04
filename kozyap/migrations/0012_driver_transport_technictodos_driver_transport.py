@@ -5,9 +5,8 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('kozyap', '0011_alter_exchangeinstrument_options_and_more'),
+        ('kozyap', '0002_object_brigadier'),
     ]
 
     operations = [
@@ -36,14 +35,21 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField(verbose_name='Sana')),
                 ('todos', models.CharField(max_length=256, verbose_name='Nima Ish Qildi')),
-                ('driver', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='techtodos', to='kozyap.driver', verbose_name='Texnika Mashinisti')),
-                ('object', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='techtodos', to='kozyap.object', verbose_name='Texnika Nomi')),
-                ('transport', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='techtodos', to='kozyap.transport', verbose_name='Texnika Nomi')),
+                ('driver', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT,
+                                             related_name='techtodos', to='kozyap.driver',
+                                             verbose_name='Texnika Mashinisti')),
+                ('object', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT,
+                                             related_name='techtodos', to='kozyap.object',
+                                             verbose_name='Texnika Nomi')),
+                ('transport', models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT,
+                                                related_name='techtodos', to='kozyap.transport',
+                                                verbose_name='Texnika Nomi')),
             ],
         ),
         migrations.AddField(
             model_name='driver',
             name='transport',
-            field=models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT, to='kozyap.transport', verbose_name='Mashinasi'),
+            field=models.ForeignKey(default=-1, on_delete=django.db.models.deletion.SET_DEFAULT, to='kozyap.transport',
+                                    verbose_name='Mashinasi'),
         ),
     ]

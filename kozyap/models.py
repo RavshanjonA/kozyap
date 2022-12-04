@@ -12,6 +12,7 @@ class Object(models.Model):  # Obyekt
     brigadier = models.ForeignKey(verbose_name="Brigadir", to='kozyap.Brigadier', related_name="ojects",
                                   on_delete=models.SET_NULL, null=True)
 
+
     class Meta:
         db_table = "object"
         verbose_name = "Obyekt"
@@ -76,7 +77,7 @@ class StaffReport(models.Model):  # Xodimlar Keldi Kettisi Bitta Hodim uchun
         verbose_name_plural = "KunlikHodimlar"
 
 
-class Instrument(models.Model):
+class Intruments(models.Model):
     owner = models.ForeignKey(verbose_name="Brigadier", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1)
     status = models.CharField(verbose_name="Holati", max_length=128)
     name = models.CharField(verbose_name="Instrument Nomi", max_length=128)
@@ -189,7 +190,7 @@ class ExChangeInstrument(models.Model):  # Instrument  Oldi berdisi
     object = models.ForeignKey(verbose_name="Obyekt nomi", to=Object, on_delete=models.SET_DEFAULT, default=-1)
     given = models.ForeignKey(verbose_name="Kim Oldi", to=Brigadier, on_delete=models.SET_DEFAULT, default=-1,
                               related_name="given")
-    instrument = models.ForeignKey(verbose_name="Instrument", to=Instrument, on_delete=models.SET_DEFAULT, default=-1,
+    instrument = models.ForeignKey(verbose_name="Instrument", to=Intruments, on_delete=models.SET_DEFAULT, default=-1,
                                    related_name="exchange")
     status = models.CharField(verbose_name="Instrument holati", max_length=128, default="-")
     count = models.IntegerField(verbose_name="Soni", default=0)
@@ -216,3 +217,4 @@ class TechnicTodos(models.Model):  # Texnikalar Hisobi
     transport = models.ForeignKey(verbose_name="Texnika Nomi", to=Transport, on_delete=models.SET_DEFAULT, default=-1,
                                   related_name="techtodos")
     todos = models.CharField(verbose_name="Nima Ish Qildi", max_length=256)
+

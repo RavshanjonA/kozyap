@@ -1,0 +1,67 @@
+{% extends 'app/base/base.html' %}    <!-- End header  -->
+{% block content %}
+    {% load static %}
+
+    <section id="parallax" class="head-sub-main">
+        <div class="bg-overlay"></div>
+
+        <div class="container">
+            {% for service in services %}
+                <div class="all-box-inner">
+
+                    <h1>{{ service.title }} </h1>
+
+                    <div class="breadcrumb-container clearfix">
+
+                        <ul class="breadcrumb">
+                            <li><a href="{% url 'index' %}">Anasayfa</a></li>
+                            <li class="active">Laser Screed</li>
+
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                </section>
+                <!-- End All Pages Sub header-->
+                <!-- Start Certification -->
+
+                <section class="paragraph-bg bcc-padding">
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="title-section-inner">
+                            <h3>{{ service.title }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-60">
+                <div class="col-md-8 col-sm-12">
+                <div class="left-certification">
+                    <p>{{ service.description }}</p>
+                    <div align="center"><img src="{{ service.image.url }}" alt="resim"></div>
+
+                </div>
+            {% endfor %}
+            </div>
+
+            </div>
+
+            </div>
+            </section>
+
+
+    <!-- End Certification -->
+    <!-- Start Our Testimonials -->
+
+    <!-- End Our Testimonials -->
+    <!-- Start Call Now -->
+    <section id="third" class="call-now-box bcc-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

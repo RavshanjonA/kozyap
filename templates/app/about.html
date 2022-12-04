@@ -1,0 +1,77 @@
+{% extends 'app/base/base.html' %}    <!-- End header  -->
+{% block content %}
+    {% load static %}
+    <!-- End header  -->
+    <!-- Start All Pages Sub header -->
+    <section id="parallax" class="head-sub-main">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="all-box-inner">
+                <h1>Biz Haqimizda</h1>
+                <p></p>
+                <div class="breadcrumb-container clearfix">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'index' %}">Bosh Sahifa</a></li>
+                        <li class="active">Biz Haqimizda</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End All Pages Sub header-->
+    <!-- Start Service -->
+    <section class="paragraph-bg bcc-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="title-section-inner">
+                        <h3>Biz Haqimizda</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="service-box-inner">
+                    {% for about in abouts %}
+                        <font face="tahoma" size="5" color="#01477f"> {{ about.title }} </font>
+
+                        <h3><p>{{ about.description }}</p></h3>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="service-box-inner">
+                    <font face="tahoma" size="5" color="#01477f"> Missiya & Vazifa </font>
+
+                    <h3><p>- Ongli ravishda samarali bo'lish.</p></h3>
+                    <h3><p>- Har doim o'zingizni yangilang.</p></h3>
+                    <h3><p>- To'g'ri tashxis, to'g'ri yechim.</p></h3>
+                    <h3><p>- Vizyonni maydonda aks ettirish.</p></h3>
+                    <h3><p>- Sifat va mukammallik tamoyilini qabul qildi.</p></h3>
+                    <h3><p>- Ishbilarmonlik etikasini birinchi o'rinda tutish.</p></h3>
+
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- End Service -->
+    <!-- Start Why Choose us -->
+
+    <!-- End Why Choose us -->
+    <!-- Start Our Testimonials -->
+
+    <!-- End Our Testimonials -->
+    <!-- Start Call Now -->
+    <section id="third" class="call-now-box bcc-padding">
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

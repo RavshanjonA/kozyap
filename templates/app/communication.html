@@ -1,0 +1,124 @@
+{% extends 'app/base/base.html' %}    <!-- End header  -->
+{% block content %}
+    {% load static %}
+    <section id="parallax" class="head-sub-main">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="all-box-inner">
+                <h1>İletişim</h1>
+
+                <div class="breadcrumb-container clearfix">
+                    <ul class="breadcrumb">
+                        <li><a href="index.html">Anasayfa</a></li>
+                        <li class="active">İletişim</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End All Pages Sub header-->
+    <!-- Start Contact -->
+    <section class="paragraph-bg bcc-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="title-section-inner">
+                        <h3>İletişim Bilgilerimiz</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3><p>Kozyap İnşaat Sanayi ve Ticatet Limited Şirketi.</p></h3>
+                    <h3><p>Adres : Merkez Mah. Doğan araslı bulvarı 1115 Sok No:2 Tasarımcılar İş Merkezi Kat:5 44-45
+                        Esenyurt/İstanbul </p></h3>
+
+
+                    <h2><p>İletişim</p></h2>
+
+
+                    <h3><p>Telefon : 0212 620 58 58</p></h3>
+                    <h3><p>Mobil: Adil Yeşilkaya - 0532 791 72 58 </p></h3>
+
+                    <h3><p>Email : info@kozyap.com.tr</p></h3>
+                    <h3><p>Email : adil@kozyap.com.tr</p></h3>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Contact -->
+    <!-- Start Map -->
+    <div class="container">
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3009.4504736736585!2d28.678248000000004!3d41.03727700000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5eeb67a84366c5bd!2slaser%20screed!5e0!3m2!1str!2str!4v1575800169562!5m2!1str!2str"
+                    width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </div>
+    </div>
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="title-section">
+                    <h2>Mail <span>Gönder</span></h2>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form id="signupForm" method="post" class="form-horizontal" action="contact-process.php">
+                    <div class="row">
+                        <div class="col-md-4 has-error">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="firstname" name="firstname"
+                                       placeholder="First name"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4 has-error">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lastname" name="lastname"
+                                       placeholder="Last name"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4 has-error">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 has-errors">
+                            <div class="form-group">
+                            <textarea id="message" class="form-control" name="message" placeholder="Message"
+                                      rows="12"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="submit-btn" name="signup" value="Sign up">Gönder</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- End Contact Form -->
+    <!-- Start Call Now -->
+    <section id="third" class="call-now-box bcc-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Call Now -->
+    <!-- Start Partner -->
+
+    <!-- End Partner -->
+    <!-- Start Footer -->
+{% endblock content %}
